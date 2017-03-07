@@ -1,107 +1,146 @@
-/**
- * Alexandra Zhao <yz3514@bard.edu>
- * Feb 26 2017
- *Idea 135
- *p5-pong
- *I found this game is so complicated for playing when use the right and left key, so i movement of paddle with mouse. Also, since we are required a "game over" thing and specific lives, i modify this game to everyone only have one chance to play it, and using the framecourt to court the time. The time longer you pla means you survived longer time. The game will reset once you died. 
- */
+var img1;
+var img2;
+var x = 100;
+var y = 0;
+var face;
+var hit=false;
 
 
-var paddle_x, paddle_y;
-var paddle_w, paddle_h;
-var paddle_step;
-
-var ball_x, ball_y;
-var ball_r;
-var ball_x_step, ball_y_step;
 
 
+
+
+
+function preload(){
+    img1=loadImage("G_2.png");
+    img2=loadImage("G_3.png")
+    
+}
 function setup() {
-  createCanvas(600, 300);
-  paddle_h = 16;
-  paddle_w = 6 * paddle_h;
-  paddle_x = width / 2;
-  paddle_y = height - paddle_h;
-  paddle_step = 0;
-  ball_r = 13;
-  textSize(20);
-  frameRate()
-  reset();
+    createCanvas(1000,500); 
+   
+   
+    strokeWeight(0);
+    frameRate(20);
+    
+    
+    
+    
 }
 
 function draw() {
-  background(196);
-  
-  textSize(68);
-  
-    text(frameCount, 480, 100);
- 
+   background(0);  
     
+    
+  image(img1,20,450);
+  image(img1,40,450);
+    image(img1,60,450);
+    image(img1,80,450);
+   
+    fill(random(0,255),random(150,200),random(0,255))
+    rect(0,300,100,20);
+    rect(200,random(200,370),60,20);
+    rect(310,random(80,150),70,20);
+    rect(450,random(360,480),40,20);
+    rect(500,random(200,400),90,20);
+    rect(600,random(50,150),20,20);
+    rect(630,random(20,400),50,20);
+    rect(700,random(300,500),90,20);
+    rect(800,random(50,380),30,20);
+    rect(820,random(160,270),40,20);
+    rect(910,random(360,450),30,20);
+    rect(950,random(200,400),50,20);
+    face(50,50);
+    
+    hit1 = collideRectCircle(200,random(200,370),60,20,x,y+280,40,50);
+   
+    if (hit1){
+            alert("you die!");
+    }
+    hit2 = collideRectCircle(310,random(80,150),70,20,x,y+280,40,50);
+    if (hit2){
+        alert("you are loser");
+    }
+    
+    hit3 = collideRectCircle(450,random(360,480),40,20,x,y+280,40,50);
+    if (hit3){
+        alert("you have already passed two sessions! Owwww!")
+    }
+    hit4 = collideRectCircle(500,random(200,400),90,20,x,y+280,40,50);
+    if (hit4){
+        alert("you are kind of good, but...")
+    }
+    hit5 = collideRectCircle (600,random(50,150),20,20,x,y+280,40,50);
+    if (hit5){
+        alert("half way died")
+    }
+     hit6 = collideRectCircle(630,random(20,400),50,20,x,y+280,40,50);
+    if (hit6){
+        alert("Good Job, why not keep further?")
+    }
+    hit7 =collideRectCircle(700,random(300,500),90,20,x,y+280,40,50);
+    if (hit7){
+        alert("AHA!")
+    }
+    hit8 =collideRectCircle(800,random(50,380),30,20,x,y+280,40,50);
+    if (hit8){
+        alert("No way!!")
+    }
+    hit9 =collideRectCircle(820,random(160,270),40,20,x,y+280,40,50);
+    if (hit9){
+        alert("you are almost win this game!")
+    }
+    hit10 =collideRectCircle(910,random(310,450),30,20,x,y+280,40,50);
+    if (hit10){
+        alert("Okay, i have noting to day baby.")
+    }
+    hit11 =collideRectCircle(950,random(200,400),50,20,x,y+280,40,50);
+    if (hit11){
+        alert("Dude! What are you doing!")
+    }
+    
+     
+}
+ 
+   
 
-
-
-  // move paddle
-  //paddle_x += (mouseX - paddle_x) * .1;
-  paddle_x = mouseX-paddle_w/2 + paddle_step;
-
-  // is the ball hitting the right or left wall?
-  if (ball_x - ball_r < 0 || ball_x + ball_r > width) {
-    ball_x_step = -ball_x_step;
-  }
-
-  // hitting the top?
-  if (ball_y - ball_r < 0) {
-    ball_y_step = -ball_y_step;
-  }
-
- // hitting the paddle?
-  if (ball_y + ball_r > paddle_y) {
-    if (ball_x >= mouseX-paddle_w/2 && ball_x <= mouseX-paddle_w/2 + paddle_w) {
-      ball_y_step = -ball_y_step;
-      ball_y = paddle_y - ball_r;
+  
+function face(){
+     
+     if(keyIsPressed){
+        if(keyCode==LEFT_ARROW){
+            x--; 
+        }
+         else if (keyCode == RIGHT_ARROW){
+            x++;
+         }
+         else {loop
+              }    
+         
+    }
+    if(keyIsPressed){
+        if((key=='w')||(key=='W')){
+            y--;
+        }
+        else if ((key=='s')||(key=='S')){
+            y++;
+        }
+        else{loop}
+        
+    }
       
-    }
+     fill(248,224,125);
+    ellipse(x,y+280,40,50);
     
+     fill(0);
+    ellipse(x+15/4,y+270,5,5);
+    ellipse(x+25/2,y+270.5,5);
+         
+      
     
-    else if (ball_y + ball_r > paddle_y){
-      alert("You lose! :(");
-      frameCourt
-      reset();
-    }
-    }
-
-  // move ball by ball_x_step and ball_y_step
-  ball_x = ball_x + ball_x_step;
-  ball_y = ball_y + ball_y_step;
-
-  //draw ball
-  noStroke();
-  fill(196, 0, 0,100);
-  ellipse(ball_x, ball_y, ball_r * 2, ball_r * 2);
-
-  // draw paddle
-  stroke(24);
-  fill(64);
-  rect (mouseX-paddle_w/2,paddle_y,paddle_w,paddle_h);
-  rect(paddle_x, paddle_y, paddle_w, paddle_h);
-}
-
-
-
-function reset() {
- 
-  ball_x = random(ball_r, width - ball_r);
-  ball_y = random(ball_r, height / 2);
-  ball_x_step = random(-3, 3);
-  ball_y_step = random(1, 3);
+    triangle(x+random(10,18),y+random(270,285),x+random(23,30),y+random(275,285),x+random(10,30),y+random(275,290));
     
-
+          
+  
+    
 }
-
-
-
-function keyReleased() {
-  paddle_step = 0;
-}
-
-

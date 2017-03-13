@@ -46,7 +46,7 @@ function draw() {
     fill(random(0,255),random(100,200),random(100,200))
     rect(0,300,100,20);
     rect(200,random(200,370),60,20);
-    rect(310,random(80,150),70,20);
+    rect(310,random(-10,150),70,20);
     rect(450,random(360,480),40,20);
     rect(500,random(200,400),90,20);
     rect(600,random(50,150),20,20);
@@ -57,6 +57,7 @@ function draw() {
     rect(910,random(360,450),30,20);
     rect(950,random(200,400),50,20);
     face(50,50);
+    
     
     hit1 = collideRectCircle(200,random(200,370),60,20,x,y+280,40,50);
     print ("I will give you one more chance!" + hit1);
@@ -185,10 +186,10 @@ function face(){
      
      if(keyIsPressed){
         if(keyCode==LEFT_ARROW){
-            x = x-6; 
+            x = x-8; 
         }
          else if (keyCode == RIGHT_ARROW){
-            x = x+6;
+            x = x+8;
          }
          else {loop
               }    
@@ -196,10 +197,10 @@ function face(){
     }
     if(keyIsPressed){
         if((key=='w')||(key=='W')){
-            y = y-6;
+            y = y-8;
         }
         else if ((key=='s')||(key=='S')){
-            y = y+6;
+            y = y+8;
         }
         else{loop}
     
